@@ -35,12 +35,12 @@ def create(request):
     article.save()
 
     # <a href="/articles/">
-    return redirect(f'/articles/{article.pk}') # redirect 를 불러와 index 페이지로 다시 이동하도록 만든다.
+    return redirect('articles:detail', article.pk) # redirect 를 불러와 index 페이지로 다시 이동하도록 만든다.
 
 
 # 사용자로부터 받은 article_pk 값에 해당하는 article 을 삭제
 def delete(request, article_pk):
     article = Article.objects.get(pk=article_pk)
     article.delete()
-    
-    return redirect('/articles/')
+
+    return redirect('articles:index')

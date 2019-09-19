@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Article Detail</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}
+Article Detail
+{% endblock title %}
+
+{% block body %}
   <h1>title: {{ article.title }}</h1>
   <p>created: {{ article.created_at }}</p>
   <hr>
   <p>content: {{ article.content }}</p>
-  <a href="/articles/">[BACK]</a>
-  <a href="/articles/{{ article.pk }}/delete/" onclick="return confirm('Are you sure?')">[DELETE]</a>
-</body>
-</html>
+  <a href="{% url 'articles:index' %}">[BACK]</a>
+  <a href="{% url 'articles:delete' article.pk %}" onclick="return confirm('Are you sure?')">[DELETE]</a>
+{% endblock body %}
+

@@ -2,10 +2,12 @@ from django.urls import path
 from . import views # 같은 경로의 views.py 가져와서 함수를 사용할 수 있게 함
 
 # /articles/__ 의 경로
+app_name= 'articles'
 urlpatterns = [
-    path('', views.index),
-    path('<int:article_pk>/', views.detail),
-    path('new/', views.new),
-    path('create/', views.create),
-    path('<int:article_pk>/delete/', views.delete),
+    # 이름을 지정해줘서 경로를 바꾸더라도 찾아갈 수 있도록 함
+    path('', views.index, name='index'),
+    path('<int:article_pk>/', views.detail, name='detail'), # detail
+    path('new/', views.new, name='new'),
+    path('create/', views.create, name='create'),
+    path('<int:article_pk>/delete/', views.delete, name='delete'),
 ]
