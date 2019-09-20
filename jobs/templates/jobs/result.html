@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Result
+{% endblock title %}
+
+{% block body %}
+<h1>전생 직업 결과!</h1>
+<img src="{{ gif_url }}" alt="job image">
+<p>{{ job.name }}의 전생 직업은 {{ job.past_job }}입니다.</p>
+<form action="{% url 'jobs:new' %}" method="GET">
+  {% csrf_token %}
+  <button type="submit">[뒤로가기]</button>
+</form>
+{% endblock body %}

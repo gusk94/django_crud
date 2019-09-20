@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Write name
+{% endblock title %}
+
+{% block body %}
+<h1>Write name</h1>
+<form action="{% url 'jobs:new' %}" method="POST">
+  {% csrf_token %}  
+  Name : <input type="text" name="name"><br>
+  <button type="submit">[Submit]</button>
+</form>
+{% endblock body %}
