@@ -10,3 +10,17 @@ class Article(models.Model):
     
     # python manage.py makemigrations : 스키마를 어떻게 만들 것인지 장고에게 알려줌(모델 정의 알려줌)
     # python manage.py migrate : 실제 스키마를 만듦, 데이터베이스 테이블을 만든다.
+
+
+class Comment(models.Model):
+    # on_delete=models.CASCADE == 'Article 이 삭제되면 Comment 도 함께 삭제'
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    content = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-pk']
+
+    def __str__(self):
+        return self.content

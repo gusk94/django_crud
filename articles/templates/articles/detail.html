@@ -9,6 +9,22 @@ Article Detail
   <p>created: {{ article.created_at }}</p>
   <hr>
   <p>content: {{ article.content }}</p>
+  <hr>
+  <h4>Comments</h4>
+  {% comment %} 댓글 작성을 위한 form {% endcomment %}
+  <form action="{% url 'articles:comments_create' article.pk %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name='content'>
+    <button type="submit">[OK]</button>
+  </form>
+  <ul>
+    {% for comment in comments %}
+    <li>{{ comment.content }}</li>
+    {% empty %}
+      <p>아직 댓글이 없습니다...</p>
+    {% endfor %}
+  </ul>
+  <hr>
   <a href="{% url 'articles:index' %}">[BACK]</a>
   <form action="{% url 'articles:update' article.pk %}" method="GET" onclick="return confirm('Are you sure?')">
     {% csrf_token %}
