@@ -6,9 +6,11 @@ New Article
 
 {% block body %}
   <h1>Make New Articles</h1>
-  <form action="{% url 'articles:create' %}">
+  <form action="{% url 'articles:create' %}" method="POST">
+    {% csrf_token %}
     <input type="text" name="title"><br>
-    <textarea name="content" cols="30" rows="10"></textarea>
+    <textarea name="content" cols="30" rows="10"></textarea><br>
     <button type="submit">Create!</button>
   </form>
+  <a href="{% url 'articles:index' %}">[BACK]</a>
 {% endblock body %}
