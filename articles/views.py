@@ -15,7 +15,7 @@ def detail(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
 
     # article 에 해당하는 모든 comment 가져오기
-    comments = article.comment_set.all()
+    comments = article.comments.all()
 
     context = {'article': article, 'comments': comments}
     return render(request, 'articles/detail.html', context)
@@ -83,9 +83,19 @@ def comments_create(request, article_pk):
         article = get_object_or_404(Article, pk=article_pk)
         content = request.POST.get('content')
         comment = Comment()
+        # 무슨 article 의 comment 인지 알려주기 위함
         comment.article = article
         comment.content = content
         comment.save()
         return redirect('articles:detail', article_pk)
     else:
         return redirect('articles:detail', article_pk)
+
+
+def comments_delete(request, article_pk, comment_pk):
+    # comment_pk 에 해당하는 댓글 삭제
+    # 댓글 삭제 후 detail 페이지로 이동
+    if request.method == 'POST':
+        comment = get_object_or_404(Comment, pk=comment_pk)
+        comment.delete()
+    redirect('articles:detail', article_pk)
