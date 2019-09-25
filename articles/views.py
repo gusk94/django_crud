@@ -98,4 +98,4 @@ def comments_delete(request, article_pk, comment_pk):
     if request.method == 'POST':
         comment = get_object_or_404(Comment, pk=comment_pk)
         comment.delete()
-    redirect('articles:detail', article_pk)
+    return redirect('articles:detail', article_pk)
