@@ -6,9 +6,11 @@ Write name
 
 {% block body %}
 <h1>Write name</h1>
-<form action="{% url 'jobs:new' %}" method="POST">
+<form action="{% url 'jobs:new' %}" method="POST" enctype="multipart/form-data">
   {% csrf_token %}  
   Name : <input type="text" name="name"><br>
+  <label for="image">Profile_image: </label>
+  <input type="file" name="image" id="image" accept="image/*"><br>
   <button type="submit">[Submit]</button>
 </form>
 {% endblock body %}

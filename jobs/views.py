@@ -11,12 +11,14 @@ def new(request):
         return render(request, 'jobs/new.html')
     else:
         name = request.POST.get('name')
+        image = request.FILES.get('image')
         if not Job.objects.filter(name=name):
             job = Job()
             job.name = name
             fake = Faker()
             past_job = fake.job()
             job.past_job = past_job
+            job.profile_image = image
             job.save()
         job = Job.objects.filter(name=name).first()
         KEY = config('KEY')
@@ -26,6 +28,5 @@ def new(request):
         gif_url = ''
         if data:
             gif_url = data[0].get("images").get("original").get("url")
-            print(gif_url)
         context = {'job': job, 'gif_url' : gif_url}
         return render(request, 'jobs/result.html', context)

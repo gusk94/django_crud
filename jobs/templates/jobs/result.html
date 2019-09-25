@@ -5,8 +5,11 @@ Result
 {% endblock title %}
 
 {% block body %}
+<img src="{{ gif_url }}" alt="job image"><br> 
 <h1>전생 직업 결과!</h1>
-<img src="{{ gif_url }}" alt="job image">
+{% if job.profile_image %}
+  <img src="{{ job.profile_image.url }}" alt="{{ job.profile_image }}">
+{% endif %}
 <p>{{ job.name }}의 전생 직업은 {{ job.past_job }}입니다.</p>
 <form action="{% url 'jobs:new' %}" method="GET">
   {% csrf_token %}
