@@ -35,10 +35,12 @@ def create(request):
         # /articles/new/ 의 new.html 의 form 에서 전달받은 데이터
         title = request.POST.get('title')
         content = request.POST.get('content')
+        image = request.FILES.get('image')
 
         article = Article()
         article.title = title
         article.content = content
+        article.image = image
         article.save()
 
         # <a href="/articles/">
@@ -66,8 +68,11 @@ def update(request, article_pk):
     if request.method == 'POST':
         title = request.POST.get('title')
         content = request.POST.get('content')
+        image = request.FILES.get('image')
         article.title = title
         article.content = content
+        if image:
+            article.image = image
         article.save()
         return redirect('articles:detail', article.pk)
 

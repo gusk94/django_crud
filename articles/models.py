@@ -3,7 +3,12 @@ from django.db import models
 # Create your models here.
 class Article(models.Model):
     title = models.CharField(max_length=20)
+    # 문자열 빈 값 저장 : null X , ''로 저장
     content = models.TextField()
+    # blank: 데이터 유효성과 관련되어 있다.
+    # null : DB 와 관련되어 있다.
+    # '', Null
+    image = models.ImageField(blank=True)
     # auto_now_add 는 추가할 때의 시간, auto_now는 지금 시간
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

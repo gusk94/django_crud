@@ -8,6 +8,9 @@ Article Detail
   <h1>title: {{ article.title }}</h1>
   <p>created: {{ article.created_at }}</p>
   <hr>
+  {% if article.image %}
+    <img src="{{ article.image.url }}" alt="{{ article.image }}">
+  {% endif %}
   <p>content: {{ article.content }}</p>
   <hr>
   <h4>Comments</h4>
@@ -32,7 +35,7 @@ Article Detail
   </ul>
   <hr>
   <a href="{% url 'articles:index' %}">[BACK]</a>
-  <form action="{% url 'articles:update' article.pk %}" method="GET" onclick="return confirm('Are you sure?')">
+  <form action="{% url 'articles:update' article.pk %}" method="GET">
     {% csrf_token %}
     <button type="submit">[Update]</button>
   </form>
